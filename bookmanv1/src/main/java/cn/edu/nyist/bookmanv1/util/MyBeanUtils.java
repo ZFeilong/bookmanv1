@@ -2,15 +2,12 @@ package cn.edu.nyist.bookmanv1.util;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.Map;
-
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.commons.beanutils.converters.DateTimeConverter;
-
 public class MyBeanUtils {
-
 	/**
 	 * 
 	 * @param bean 要被赋值的JavaBean

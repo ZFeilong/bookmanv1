@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="cn.edu.nyist.bookmanv1.vo.TypeVo"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
@@ -72,9 +74,18 @@
 						<label for="selectTid" class="col-sm-2 control-label"> 类型: </label>
 						<div class="col-sm-10">
 							<select name="tid" class="form-control" id="selectTid">
+							<!-- 
 								<option value="1">电子书</option>
 								<option value="2">编程</option>
-								<option value="3">烹饪</option>
+								<option value="3">烹饪</option> -->
+								<%
+								  List<TypeVo> ls=(List<TypeVo>)request.getAttribute("ls");
+								  for(TypeVo typeVo:ls){
+									  %>
+									  <option value="<%=typeVo.getId()%>"><%=typeVo.getName() %></option>
+									  <% 
+								  }
+								%>
 							</select>
 						</div>
 					</div>
