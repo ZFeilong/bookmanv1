@@ -1,0 +1,38 @@
+{
+  "name": "bootstrap-validate",
+  "description": "A simple Form Validation Utility for Bootstrap no depending on jQuery.",
+  "main": "dist/bootstrap-validate.js",
+  "authors": [
+    "Pascale Beier <mail@pascalebeier.de>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "bootstrap",
+    "validation",
+    "form",
+    "validate",
+    "bootstrap3",
+    "form-validation"
+  ],
+  "homepage": "https://github.com/PascaleBeier/bootstrap-validate",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "__tests__",
+    "docs",
+    "build",
+    "examples",
+    "src",
+    "demo.gif"
+  ],
+  "version": "1.1.0",
+  "_release": "1.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.1.0",
+    "commit": "ee31fef9b0f48fb9535009de23801ec06db5d784"
+  },
+  "_source": "https://github.com/PascaleBeier/bootstrap-validate.git",
+  "_target": "1.1.0",
+  "_originalSource": "bootstrap-validate"
+}
