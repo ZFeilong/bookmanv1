@@ -74,18 +74,9 @@
 						<label for="selectTid" class="col-sm-2 control-label"> 类型: </label>
 						<div class="col-sm-10">
 							<select name="tid" class="form-control" id="selectTid">
-							<!-- 
-								<option value="1">电子书</option>
-								<option value="2">编程</option>
-								<option value="3">烹饪</option> -->
-								<%
-								  List<TypeVo> ls=(List<TypeVo>)request.getAttribute("ls");
-								  for(TypeVo typeVo:ls){
-									  %>
-									  <option value="<%=typeVo.getId()%>"><%=typeVo.getName() %></option>
-									  <% 
-								  }
-								%>
+							
+								
+								
 							</select>
 						</div>
 					</div>
@@ -130,5 +121,15 @@
 			});
 		});
 	</script>
+	<script type="text/javascript">
+            function fillSel(){
+              var sel=document.getElementById("selectTid");
+              for (var i = 0; i < types.length; i++) {
+            	  sel.appendChild(new Option(types[i].name,types[i].id));
+			}
+            }
+	</script>
+	<!-- onload：表示JavaScript加载完毕，然后再去找var types这样才能找到 -->
+	<script type="text/javascript" src="findAllTypes" onload="fillSel()"></script>
 </body>
 </html>
