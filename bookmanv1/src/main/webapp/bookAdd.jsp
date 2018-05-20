@@ -4,21 +4,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="utf-8">
 <title>书籍添加</title>
 <!-- 1、告诉浏览器表缩放 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-</style>
 </head>
 <body>
 	<div class="container-fluid  well">
 		<div class="row">
 			<div class="col-md-12">
-				<form class="form-horizontal" role="form" method="post" action="bookAdd" id="loginFrm" enctype="multipart/form-data">
+				<form class="form-horizontal" role="form" method="post" action="bookAdd" id="bookAddFrm" enctype="multipart/form-data">
 					<%
 						if (request.getAttribute("msg") != null) {
 					%>
@@ -74,9 +71,6 @@
 						<label for="selectTid" class="col-sm-2 control-label"> 类型: </label>
 						<div class="col-sm-10">
 							<select name="tid" class="form-control" id="selectTid">
-							
-								
-								
 							</select>
 						</div>
 					</div>
@@ -106,7 +100,6 @@
 	<script type="text/javascript" src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 	<script type="text/javascript" src="bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-CN.min.js"></script>
 	<script type="text/javascript" src="bower_components/jquery-validation/dist/jquery.validate.js"></script>
-	<script type="text/javascript" src="bower_components/jquery-validation-bootstrap-tooltip/jquery-validate.bootstrap-tooltip.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			$("#vcodeImg").click(function(evt) {
@@ -115,21 +108,55 @@
 			});
 			//日期控件
 			$('#inputPubDate').datepicker({
-				format : 'yyyy-mm-dd',
+				format : 'yyyy-mm-dd',//日期格式
 				language : 'zh-CN',//提示中文界面
 				autoclose : true//自动关闭
 			});
+			//添加验证
+			$( "#bookAddFrm" ).validate( {
+				rules: {
+					name: "required",
+					photo: "required",
+					price: {
+						required: true,
+						number: true
+					}
+				},
+				messages: {
+					name: "书名必填",
+					photo: "图片必填",
+					price: {
+						required: "必填",
+						number: "必须是数字"
+					}
+				},
+				errorElement: "em",
+				errorPlacement: function ( error, element ) {
+					// Add the `help-block` class to the error element
+					error.addClass( "help-block" );
+					error.addClass("alert-warning");
+					if ( element.prop( "type" ) === "checkbox" ) {
+						error.insertAfter( element.parent( "label" ) );
+					} else {
+						error.insertAfter( element );
+					}
+				},
+				highlight: function ( element, errorClass, validClass ) {
+					$( element ).parents( ".col-sm-6" ).addClass( "has-error" ).removeClass( "has-success" );
+				},
+				unhighlight: function (element, errorClass, validClass) {
+					$( element ).parents( ".col-sm-6" ).addClass( "has-success" ).removeClass( "has-error" );
+				}
+			} );
 		});
-	</script>
-	<script type="text/javascript">
-            function fillSel(){
-              var sel=document.getElementById("selectTid");
-              for (var i = 0; i < types.length; i++) {
-            	  sel.appendChild(new Option(types[i].name,types[i].id));
+		function fillSel(types) {
+			var sel = document.getElementById("selectTid");
+			for (var i = 0; i < types.length; i++) {
+				sel.appendChild(new Option(types[i].name, types[i].id));
 			}
-            }
+		}
 	</script>
-	<!-- onload：表示JavaScript加载完毕，然后再去找var types这样才能找到 -->
-	<script type="text/javascript" src="findAllTypes" onload="fillSel()"></script>
+	<!-- iframe处于安全考虑不允许执行JavaScript -->
+	<iframe src="findAllTypes" style="display: none;"></iframe>
 </body>
 </html>

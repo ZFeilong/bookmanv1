@@ -3,10 +3,15 @@ package cn.edu.nyist.bookmanv1.dao.impl;
 import java.sql.Connection;
 
 import java.sql.PreparedStatement;
-
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.edu.nyist.bookmanv1.dao.BookDao;
 import cn.edu.nyist.bookmanv1.util.DsUtil;
+import cn.edu.nyist.bookmanv1.util.PageConstant;
 import cn.edu.nyist.bookmanv1.vo.BookVo;
 
 public class BookDaoJdbcImpl implements BookDao {
@@ -37,6 +42,60 @@ public class BookDaoJdbcImpl implements BookDao {
 		
 	}
 	return 0;
+	}
+
+	@Override
+	public List<BookVo> findAll(int pageNo) {
+		Connection conn=null;
+		Statement stmt=null;
+		ResultSet rs=null;
+		try {
+			conn=DsUtil.getConn();
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery("select * from t_book limit"+((pageNo-1)*PageConstant.PAGE_SIZE+1-1)+","+PageConstant.PAGE_SIZE);
+		    List<BookVo> ls= new ArrayList<>();
+		    while (rs.next()) {//每行对应一个对象
+				BookVo bookVo=new BookVo();
+				bookVo.setAuthor(rs.getString("author"));
+				bookVo.setDescri(rs.getString("descri"));
+				bookVo.setId(rs.getInt("id"));
+				bookVo.setName(rs.getString("name"));
+				bookVo.setPhoto(rs.getString("photo"));
+				bookVo.setPrice(rs.getDouble("price"));
+				bookVo.setPubDate(rs.getDate("punDate"));
+				bookVo.setTid(rs.getInt("tid"));
+				ls.add(bookVo);
+			}
+		    return ls;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DsUtil.free(rs, stmt, conn);
+			
+		}
+		return null;
+	}
+
+	@Override
+	public int getTotal() {
+		 Connection conn=null;
+		 PreparedStatement stmt=null;
+		 ResultSet rs=null;
+		 try {
+			conn=DsUtil.getConn();
+			String sql="select count(*) from t_book";
+			System.out.println(sql);
+			rs=stmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DsUtil.free(rs, stmt, conn);
+			
+		}
+		return 0;
 	}
 	
 
