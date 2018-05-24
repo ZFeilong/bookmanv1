@@ -21,17 +21,17 @@ import javax.servlet.http.HttpSession;
 public class ValidCodeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	/**
-	 * ÑéÖ¤ÂëÍ¼Æ¬µÄ¿í¶È¡£
+	 * éªŒè¯ç å›¾ç‰‡çš„å®½åº¦ã€‚
 	 */
 	private int width = 60;
 
 	/**
-	 * ÑéÖ¤ÂëÍ¼Æ¬µÄ¸ß¶È¡£
+	 * éªŒè¯ç å›¾ç‰‡çš„é«˜åº¦ã€‚
 	 */
 	private int height = 20;
 
 	/**
-	 * ÑéÖ¤Âë×Ö·û¸öÊı
+	 * éªŒè¯ç å­—ç¬¦ä¸ªæ•°
 	 */
 	private int codeCount = 4;
 
@@ -41,7 +41,7 @@ public class ValidCodeServlet extends HttpServlet {
 	private int xx = 0;
 
 	/**
-	 * ×ÖÌå¸ß¶È
+	 * å­—ä½“é«˜åº¦
 	 */
 	private int fontHeight;
 
@@ -58,17 +58,17 @@ public class ValidCodeServlet extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		// ´Óweb.xmlÖĞ»ñÈ¡³õÊ¼ĞÅÏ¢
-		// ¿í¶È
-		String strWidth = config.getInitParameter("width");//¶ÁÈ¡³õÊ¼»¯²ÎÊı
-		// ¸ß¶È
+		// ä»web.xmlä¸­è·å–åˆå§‹ä¿¡æ¯
+		// å®½åº¦
+		String strWidth = config.getInitParameter("width");//è¯»å–åˆå§‹åŒ–å‚æ•°
+		// é«˜åº¦
 		String strHeight = config.getInitParameter("height");
-		// ×Ö·û¸öÊı
+		// å­—ç¬¦ä¸ªæ•°
 		String strCodeCount = config.getInitParameter("codeCount");
 
-		// ½«ÅäÖÃµÄĞÅÏ¢×ª»»³ÉÊıÖµ
+		// å°†é…ç½®çš„ä¿¡æ¯è½¬æ¢æˆæ•°å€¼
 		try {
-			//Èç¹ûÄãÅäÖÃÁËÍ¼Æ¬µÄ¿í¶È£¬ÓÃÄãÅäÖÃ£»Èç¹ûÄãÄ¾ÓĞÅäÖÃ£¬¾ÍÄ¬ÈÏÖµ
+			//å¦‚æœä½ é…ç½®äº†å›¾ç‰‡çš„å®½åº¦ï¼Œç”¨ä½ é…ç½®ï¼›å¦‚æœä½ æœ¨æœ‰é…ç½®ï¼Œå°±é»˜è®¤å€¼
 			if (strWidth != null && strWidth.length() != 0) {
 				width = Integer.parseInt(strWidth);
 			}
@@ -88,36 +88,33 @@ public class ValidCodeServlet extends HttpServlet {
 
 	}
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public ValidCodeServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		       // ¶¨ÒåÍ¼Ïñbuffer 
+		       // å®šä¹‰å›¾åƒbuffer 
 				BufferedImage buffImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB); 
 				Graphics2D gd = buffImg.createGraphics(); 
 
-				// ´´½¨Ò»¸öËæ»úÊıÉú³ÉÆ÷Àà
+				// åˆ›å»ºä¸€ä¸ªéšæœºæ•°ç”Ÿæˆå™¨ç±»
 				Random random = new Random(); 
 
-				// ½«Í¼ÏñÌî³äÎª°×É«:ÇåÆÁ
+				// å°†å›¾åƒå¡«å……ä¸ºç™½è‰²:æ¸…å±
 				gd.setColor(Color.WHITE); 
 				gd.fillRect(0, 0, width, height); 
 
-				// ´´½¨×ÖÌå£¬×ÖÌåµÄ´óĞ¡Ó¦¸Ã¸ù¾İÍ¼Æ¬µÄ¸ß¶ÈÀ´¶¨¡£
+				// åˆ›å»ºå­—ä½“ï¼Œå­—ä½“çš„å¤§å°åº”è¯¥æ ¹æ®å›¾ç‰‡çš„é«˜åº¦æ¥å®šã€‚
 				Font font = new Font("Fixedsys", Font.PLAIN, fontHeight); 
-				// ÉèÖÃ×ÖÌå¡£
+				// è®¾ç½®å­—ä½“ã€‚
 				gd.setFont(font); 
 
-				// »­±ß¿ò¡£
+				// ç”»è¾¹æ¡†ã€‚
 				gd.setColor(Color.BLACK); 
 				gd.drawRect(0, 0, width - 1, height - 1); 
 
-				// Ëæ»ú²úÉú160Ìõ¸ÉÈÅÏß£¬Ê¹Í¼ÏóÖĞµÄÈÏÖ¤Âë²»Ò×±»ÆäËü³ÌĞòÌ½²âµ½¡£
+				// éšæœºäº§ç”Ÿ160æ¡å¹²æ‰°çº¿ï¼Œä½¿å›¾è±¡ä¸­çš„è®¤è¯ç ä¸æ˜“è¢«å…¶å®ƒç¨‹åºæ¢æµ‹åˆ°ã€‚
 				gd.setColor(Color.BLACK); 
 				for (int i = 0; i < 30; i++) { 
 				int x = random.nextInt(width); 
@@ -127,38 +124,38 @@ public class ValidCodeServlet extends HttpServlet {
 				gd.drawLine(x, y, x + xl, y + yl); 
 				} 
 
-				// randomCodeÓÃÓÚ±£´æËæ»ú²úÉúµÄÑéÖ¤Âë£¬ÒÔ±ãÓÃ»§µÇÂ¼ºó½øĞĞÑéÖ¤¡£
+				// randomCodeç”¨äºä¿å­˜éšæœºäº§ç”Ÿçš„éªŒè¯ç ï¼Œä»¥ä¾¿ç”¨æˆ·ç™»å½•åè¿›è¡ŒéªŒè¯ã€‚
 				StringBuffer randomCode = new StringBuffer(); 
 				int red = 0, green = 0, blue = 0; 
 
-				// Ëæ»ú²úÉúcodeCountÊı×ÖµÄÑéÖ¤Âë¡£
+				// éšæœºäº§ç”ŸcodeCountæ•°å­—çš„éªŒè¯ç ã€‚
 				for (int i = 0; i < codeCount; i++) { 
-				// µÃµ½Ëæ»ú²úÉúµÄÑéÖ¤ÂëÊı×Ö¡£
+				// å¾—åˆ°éšæœºäº§ç”Ÿçš„éªŒè¯ç æ•°å­—ã€‚
 				String strRand = String.valueOf(codeSequence[random.nextInt(36)]); 
-				// ²úÉúËæ»úµÄÑÕÉ«·ÖÁ¿À´¹¹ÔìÑÕÉ«Öµ£¬ÕâÑùÊä³öµÄÃ¿Î»Êı×ÖµÄÑÕÉ«Öµ¶¼½«²»Í¬¡£
+				// äº§ç”Ÿéšæœºçš„é¢œè‰²åˆ†é‡æ¥æ„é€ é¢œè‰²å€¼ï¼Œè¿™æ ·è¾“å‡ºçš„æ¯ä½æ•°å­—çš„é¢œè‰²å€¼éƒ½å°†ä¸åŒã€‚
 				red = random.nextInt(255); 
 				green = random.nextInt(255); 
 				blue = random.nextInt(255); 
 
-				// ÓÃËæ»ú²úÉúµÄÑÕÉ«½«ÑéÖ¤Âë»æÖÆµ½Í¼ÏñÖĞ¡£
+				// ç”¨éšæœºäº§ç”Ÿçš„é¢œè‰²å°†éªŒè¯ç ç»˜åˆ¶åˆ°å›¾åƒä¸­ã€‚
 				gd.setColor(new Color(red, green, blue)); 
 				gd.drawString(strRand, (i + 1) * xx, codeY); 
 
-				// ½«²úÉúµÄËÄ¸öËæ»úÊı×éºÏÔÚÒ»Æğ¡£
+				// å°†äº§ç”Ÿçš„å››ä¸ªéšæœºæ•°ç»„åˆåœ¨ä¸€èµ·ã€‚
 				randomCode.append(strRand); 
 				} 
-				// ½«ËÄÎ»Êı×ÖµÄÑéÖ¤Âë±£´æµ½SessionÖĞ¡£
+				// å°†å››ä½æ•°å­—çš„éªŒè¯ç ä¿å­˜åˆ°Sessionä¸­ã€‚
 				HttpSession session = request.getSession(); 
 				session.setAttribute("validateCode", randomCode.toString()); 
 
-				// ½ûÖ¹Í¼Ïñ»º´æ¡£
+				// ç¦æ­¢å›¾åƒç¼“å­˜ã€‚
 				response.setHeader("Pragma", "no-cache"); 
 				response.setHeader("Cache-Control", "no-cache"); 
 				response.setDateHeader("Expires", 0); 
 
 				response.setContentType("image/jpeg"); 
 
-				// ½«Í¼ÏñÊä³öµ½ServletÊä³öÁ÷ÖĞ¡£
+				// å°†å›¾åƒè¾“å‡ºåˆ°Servletè¾“å‡ºæµä¸­ã€‚
 				ServletOutputStream sos = response.getOutputStream(); 
 				ImageIO.write(buffImg, "jpeg", sos); 
 				sos.close(); 
@@ -166,13 +163,8 @@ public class ValidCodeServlet extends HttpServlet {
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

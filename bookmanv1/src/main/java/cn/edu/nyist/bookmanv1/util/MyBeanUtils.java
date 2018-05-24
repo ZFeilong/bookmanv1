@@ -1,7 +1,9 @@
 package cn.edu.nyist.bookmanv1.util;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.Map;
+
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.apache.commons.beanutils.PropertyUtilsBean;
@@ -10,9 +12,9 @@ import org.apache.commons.beanutils.converters.DateTimeConverter;
 public class MyBeanUtils {
 	/**
 	 * 
-	 * @param bean è¦è¢«èµ‹å€¼çš„JavaBean
-	 * @param properties åŒ…å«å€¼çš„mapå¯¹è±¡
-	 * @param dateFormat å¦‚æœæœ‰æ—¥æœŸåˆ™éœ€è¦æŒ‡å®šæ—¥æœŸæ ¼å¼,æ— åˆ™æŒ‡å®šä¸ºnull
+	 * @param bean Òª±»¸³ÖµµÄJavaBean
+	 * @param properties °üº¬ÖµµÄmap¶ÔÏó
+	 * @param dateFormat Èç¹ûÓĞÈÕÆÚÔòĞèÒªÖ¸¶¨ÈÕÆÚ¸ñÊ½
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void populate(Object bean, Map properties, String dateFormat) {

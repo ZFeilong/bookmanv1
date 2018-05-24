@@ -24,7 +24,12 @@ public class FindAllTypesServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		//权限拦截
+				if(request.getSession().getAttribute("loginSuccess")==null||!request.getSession().getAttribute("loginSuccess").equals("1")) {
+					
+					response.sendRedirect("login.jsp");
+					return;
+				}
 		TypeBiz typeBiz=new TypeBizImpl();
 		List<TypeVo> ls=typeBiz.findAllTypes();
 		//返回JavaScript类型类型
